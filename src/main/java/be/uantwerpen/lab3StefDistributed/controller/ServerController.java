@@ -33,7 +33,7 @@ class ServerController {
         return repository.findById(id).orElseThrow(() -> new BankAccountNotFoundException(id));
     }
 
-    @PutMapping("/accounts/deposit/{id}/{amount}")
+    @GetMapping("/accounts/deposit/{id}/{amount}")
     Optional<BankAccount> depositMoney(@PathVariable Long id,@PathVariable int amount) {
         return repository.findById(id).map(bankAccount -> {
             bankAccount.setCapital(bankAccount.getCapital() + amount);
@@ -42,8 +42,8 @@ class ServerController {
 
     }
 
-    @PutMapping("/accounts/withdraw/{id}/{amount}")
-    Optional<BankAccount> withdrawMoney(@PathVariable Long id,@PathVariable int amount) {
+    @GetMapping("/accounts/withdraw/{id}/{amount}")
+    Optional<BankAccount> drwithawMoney(@PathVariable Long id,@PathVariable int amount) {
         return repository.findById(id).map(bankAccount -> {
             bankAccount.setCapital(bankAccount.getCapital() - amount);
             return repository.save(bankAccount);
